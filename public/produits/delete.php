@@ -1,0 +1,2 @@
+<?php
+require_once __DIR__.'/../../includes/bootstrap.php';require_roles(['ADMIN']);if($_SERVER['REQUEST_METHOD']!=='POST'){http_response_code(405);exit;}verify_csrf();$id=(int)($_POST['id']??0);try{Database::connection()->prepare('DELETE FROM produits_assurance WHERE id=?')->execute([$id]);audit('SUPPRESSION','produit_assurance',$id);flash('success','Produit supprimé.');}catch(PDOException){flash('danger','Suppression impossible : ce produit est déjà utilisé. Désactivez-le.');}redirect('produits/index.php');

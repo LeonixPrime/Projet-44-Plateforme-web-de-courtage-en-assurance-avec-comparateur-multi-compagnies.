@@ -1,0 +1,2 @@
+<?php
+require_once __DIR__.'/../../includes/bootstrap.php';require_roles(['ADMIN']);if($_SERVER['REQUEST_METHOD']!=='POST'){http_response_code(405);exit;}verify_csrf();$id=(int)($_POST['id']??0);try{Database::connection()->prepare('DELETE FROM garanties WHERE id=?')->execute([$id]);audit('SUPPRESSION','garantie',$id);flash('success','Garantie supprimée.');}catch(PDOException){flash('danger','Suppression impossible : cette garantie est utilisée par un produit.');}redirect('garanties/index.php');

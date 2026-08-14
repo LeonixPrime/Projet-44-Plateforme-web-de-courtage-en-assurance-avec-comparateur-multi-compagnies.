@@ -1,0 +1,3 @@
+.question-list { display: grid; gap: 1rem; }
+.question-item { padding: 1rem; border: 1px solid #e0e6ee; border-radius: 12px; background: #fbfcfe; }
+.question-item .form-control, .question-item .form-select { max-width: 650px; }

@@ -1,0 +1,2 @@
+<?php
+require_once __DIR__.'/../../includes/bootstrap.php';require_roles(['ADMIN']);if($_SERVER['REQUEST_METHOD']!=='POST'){http_response_code(405);exit;}verify_csrf();$id=(int)($_POST['id']??0);try{Database::connection()->prepare('DELETE FROM questions WHERE id=?')->execute([$id]);audit('SUPPRESSION','question',$id);flash('success','Question supprimée.');}catch(PDOException){flash('danger','Question déjà utilisée : désactivez-la au lieu de la supprimer.');}redirect('questions/index.php');

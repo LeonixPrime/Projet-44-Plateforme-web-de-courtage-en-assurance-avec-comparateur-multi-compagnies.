@@ -1,0 +1,2 @@
+<?php
+require_once __DIR__.'/../../includes/bootstrap.php';require_roles(['ADMIN']);if($_SERVER['REQUEST_METHOD']!=='POST'){http_response_code(405);exit;}verify_csrf();$id=(int)($_POST['id']??0);try{Database::connection()->prepare('DELETE FROM compagnies WHERE id=?')->execute([$id]);audit('SUPPRESSION','compagnie',$id);flash('success','Compagnie supprimée.');}catch(PDOException){flash('danger','Suppression impossible : des produits sont liés à cette compagnie. Désactivez-la.');}redirect('compagnies/index.php');

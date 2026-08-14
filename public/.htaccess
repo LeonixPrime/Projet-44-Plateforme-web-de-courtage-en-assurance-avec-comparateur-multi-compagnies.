@@ -1,0 +1,6 @@
+Options -Indexes
+ServerSignature Off
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
